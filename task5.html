@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Age Calculator</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #ffcc00, #ff6699);
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ffffff;
+        }
+
+        .input-container {
+            margin-top: 20px;
+        }
+
+        .input-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .input-container input {
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+            width: 200px;
+            font-size: 16px;
+        }
+
+        .input-container button {
+            padding: 8px 16px;
+            margin-top: 10px;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            color: #ffffff;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Age Calculator </h1>
+
+    <div class="input-container">
+        <label for="birthdate">Enter your birthdate:</label>
+        <input type="date" id="birthdate" required>
+        <button onclick="calculateAge()">Calculate Age</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        function calculateAge() {
+            var birthdate = document.getElementById('birthdate').value;
+            var currentDate = new Date();
+            var birthdateObj = new Date(birthdate);
+            var age = currentDate.getFullYear() - birthdateObj.getFullYear();
+
+            // Check if the birthday hasn't occurred yet this year
+            if (
+                currentDate.getMonth() < birthdateObj.getMonth() ||
+                (currentDate.getMonth() === birthdateObj.getMonth() && currentDate.getDate() < birthdateObj.getDate())
+            ) {
+                age--;
+            }
+
+            document.getElementById('result').innerHTML = "You are " + age + "years old";
+        }
+    </script>
+</body>
+</html>
